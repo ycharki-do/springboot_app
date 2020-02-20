@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment: 
+      - 'MYSQL_DATABASE=codificationV2'
+      - 'MYSQL_ROOT_PASSWORD=12345'
+  backend:
+    build: .
+    image: backend
+    depends_on: 
+      - db
+    ports: 
+      - '8087:8087'
